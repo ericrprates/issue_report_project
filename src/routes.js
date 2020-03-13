@@ -8,10 +8,12 @@ const IssueController = require("./controllers/IssueController");
 
 routes.get("/issues", IssueController.index);
 routes.get("/issues/:id", IssueController.show);
-routes.post(
-  "/issues",
-  multer(multerConfig).single("file"),
-  IssueController.create
-);
+routes.post("/issues", multer(multerConfig).array("file", 3), (req, res) => {
+  console.log("file", req.files);
+  console.log("body", req.body);
+  res.status(200).json({
+    message: "success!"
+  });
+});
 
 module.exports = routes;
