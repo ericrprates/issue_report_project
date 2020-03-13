@@ -50,7 +50,7 @@ class IssueController {
         title,
         description,
         files,
-        location
+        location: JSON.parse(location)
       });
 
       return res.send({ issue: issue });
