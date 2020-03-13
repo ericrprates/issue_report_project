@@ -8,9 +8,10 @@ const IssueController = require("./controllers/IssueController");
 
 routes.get("/issues", IssueController.index);
 routes.get("/issues/:id", IssueController.show);
-routes.post("/issues", multer(multerConfig).array("file", 3), (req, res) => {
+routes.post("/issues", multer(multerConfig).single("asdf"), (req, res) => {
   console.log("file", req.files);
-  console.log("body", req.body);
+  console.log("file", req.file);
+  // console.log("body", req.body);
   res.status(200).json({
     message: "success!"
   });
