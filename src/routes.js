@@ -8,7 +8,7 @@ const IssueController = require("./controllers/IssueController");
 
 routes.get("/issues", IssueController.index);
 routes.get("/issues/:id", IssueController.show);
-routes.post("/issues", multer(multerConfig).single("asdf"), (req, res) => {
+routes.post("/issues", multer(multerConfig).single("photo"), (req, res) => {
   console.log("file", req.files);
   console.log("file", req.file);
   // console.log("body", req.body);
