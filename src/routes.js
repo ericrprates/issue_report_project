@@ -10,7 +10,7 @@ routes.get("/issues", IssueController.index);
 routes.get("/issues/:id", IssueController.show);
 routes.post(
   "/issues",
-  multer(multerConfig).array("files[]"),
+  multer(multerConfig).single("file"),
   IssueController.create
 );
 

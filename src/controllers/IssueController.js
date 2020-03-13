@@ -36,16 +36,15 @@ class IssueController {
   async create(req, res) {
     try {
       const { title, description, location } = req.body;
+      console.log(req.file);
+      var files = {
+        name: req.file.originalname,
+        size: req.file.size,
+        key: req.file.key,
+        type: req.file.mimetype,
+        url: req.file.location || ""
+      };
 
-      var files = req.files.map(file => {
-        return {
-          name: file.originalname,
-          size: file.size,
-          key: file.key,
-          type: file.mimetype,
-          url: file.location || ""
-        };
-      });
       const issue = await Issue.create({
         title,
         description,
