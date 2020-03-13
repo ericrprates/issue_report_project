@@ -55,7 +55,8 @@ class IssueController {
 
       return res.send({ issue: issue });
     } catch (err) {
-      return res.status(400).send(err);
+      console.log(err);
+      return res.send(err);
     }
   }
 
