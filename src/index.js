@@ -20,8 +20,8 @@ class App {
   middlewares() {
     this.express.use(cors());
     this.express.use(express.json());
-    this.express.use(bodyParser.json());
-    this.express.use(bodyParser.urlencoded({ extended: false }));
+    this.express.use(bodyParser.json({ limit: "10mb", extended: true }));
+    this.express.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
     this.express.use(morgan("dev"));
     this.express.use("/", express.static(__dirname + "/../public/"));
     this.express.use(
