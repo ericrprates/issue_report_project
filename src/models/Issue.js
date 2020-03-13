@@ -32,11 +32,7 @@ const IssueSchema = new mongoose.Schema(
     title: { type: String, required: [true, "A title plz."] },
     description: { type: String, required: [true, "Describe something."] },
     files: [FileSchema],
-    latitude: Number,
-    longitude: Number,
-    state: mongoose.Schema.Types.Mixed,
-    city: String,
-    address: String,
+    location: mongoose.Schema.Types.Mixed,
     createdAt: {
       type: Date,
       default: Date.now,

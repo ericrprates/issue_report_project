@@ -35,7 +35,7 @@ class IssueController {
 
   async create(req, res) {
     try {
-      const { title, description } = req.body;
+      const { title, description, location } = req.body;
 
       var files = req.files.map(file => {
         return {
@@ -49,7 +49,8 @@ class IssueController {
       const issue = await Issue.create({
         title,
         description,
-        files
+        files,
+        location
       });
 
       return res.send({ issue: issue });
