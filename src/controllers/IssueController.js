@@ -1,4 +1,6 @@
 const Issue = require("../models/Issue").model;
+const path = require("path");
+const fs = require("fs");
 
 class IssueController {
   async index(req, res) {
@@ -35,21 +37,31 @@ class IssueController {
 
   async create(req, res) {
     try {
-      const { title, description, location } = req.body;
-      console.log(req.file);
+      const { title, description, location, file } = req.body;
+
+      // to declare some path to store your converted image
+      const type = file.substring(
+        "data:image/".length,
+        file.indexOf(";base64")
+      );
+      const now = Date.now();
+      const pathB = path.resolve("public", "uploads") + "/" + now + "." + type;
+
+      // to convert base64 format into random filename
+      const base64Data = file.replace(/^data:([A-Za-z-+/]+);base64,/, "");
+
+      fs.writeFileSync(pathB, base64Data, { encoding: "base64" });
+
       var files = {
-        name: req.file.originalname,
-        size: req.file.size,
-        key: req.file.key,
-        type: req.file.mimetype,
-        url: req.file.location || ""
+        name: now + ".jpg",
+        url: process.env.APP_URL + "/files/" + now + "." + type
       };
 
       const issue = await Issue.create({
         title,
         description,
         files,
-        location: JSON.parse(location)
+        location
       });
 
       return res.send({ issue: issue });
