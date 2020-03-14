@@ -64,7 +64,7 @@ class IssueController {
         location
       });
 
-      return res.send({ issue: issue });
+      return res.send({ success: true });
     } catch (err) {
       console.log(err);
       return res.send(err);
